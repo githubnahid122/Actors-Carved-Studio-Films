@@ -47,7 +47,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<ApiRespon
     try {
       await resend.emails.send({
         from: RESEND_FROM_EMAIL,
-        to: SITE.adminEmail,
+        to: SITE.actorsEmail,
         replyTo: data.email,
         subject,
         html,

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Quote } from "lucide-react";
+import { Quote, Star, BadgeCheck } from "lucide-react";
 
 import { TESTIMONIALS } from "@/content/testimonials";
 import { Container } from "@/components/shared/container";
@@ -12,17 +12,22 @@ export function TestimonialsSection() {
     <section className="border-t border-border bg-surface py-24 md:py-32">
       <Container>
         <SectionHeading
-          eyebrow="Word on the Street"
-          title="Trusted by brands, directors, and actors alike"
+          eyebrow="Voices From The Set"
+          title="What industry talents say about our casting"
           align="center"
           className="mx-auto mb-16 max-w-2xl"
         />
-        <Carousel ariaLabel="Client and student testimonials">
+        <Carousel ariaLabel="Actor testimonials">
           {TESTIMONIALS.map((testimonial) => (
             <Card key={testimonial.id} className="h-full">
               <CardContent className="flex h-full flex-col gap-6 p-8">
                 <Quote className="size-6 text-gold" />
                 <p className="flex-1 text-base text-muted">&ldquo;{testimonial.quote}&rdquo;</p>
+                <div className="flex items-center gap-1" aria-label={`${testimonial.rating ?? 5} out of 5 stars`}>
+                  {Array.from({ length: testimonial.rating ?? 5 }).map((_, index) => (
+                    <Star key={index} className="size-4 fill-gold text-gold" />
+                  ))}
+                </div>
                 <div className="flex items-center gap-3">
                   <div className="relative size-11 shrink-0 overflow-hidden rounded-full">
                     <Image
@@ -36,6 +41,10 @@ export function TestimonialsSection() {
                   <div>
                     <p className="text-sm font-medium text-foreground">{testimonial.name}</p>
                     <p className="text-xs text-muted-foreground">{testimonial.role}</p>
+                    <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
+                      <BadgeCheck className="size-3.5 text-gold" />
+                      Verified Google Review
+                    </p>
                   </div>
                 </div>
               </CardContent>

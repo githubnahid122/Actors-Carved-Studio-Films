@@ -7,33 +7,64 @@ import { FadeIn } from "@/components/shared/fade-in";
 export function FounderSection() {
   return (
     <section className="border-t border-border bg-background py-24 md:py-32">
-      <Container className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-        <FadeIn>
-          <div className="relative aspect-4/5 overflow-hidden rounded-md">
-            <Image
-              src={FOUNDER.photoUrl}
-              alt={`${FOUNDER.name}, ${FOUNDER.title}`}
-              fill
-              sizes="(max-width: 1024px) 100vw, 40vw"
-              className="object-cover"
-            />
-          </div>
-        </FadeIn>
-        <FadeIn delay={0.15}>
-          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
-            From the Founder
-          </span>
-          <h2 className="mt-4 font-display text-3xl text-foreground md:text-4xl">{FOUNDER.name}</h2>
-          <p className="mt-1 text-sm text-muted-foreground">{FOUNDER.title}</p>
-          <blockquote className="mt-6 border-l-2 border-gold pl-6 font-display text-xl italic text-gold-soft md:text-2xl">
-            &ldquo;{FOUNDER.signatureQuote}&rdquo;
-          </blockquote>
-          <div className="mt-6 flex flex-col gap-4 text-base text-muted">
-            {FOUNDER.bio.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
-        </FadeIn>
+      <Container>
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+          <FadeIn>
+            <div className="lg:sticky lg:top-24">
+              <div className="relative aspect-4/5 overflow-hidden rounded-md">
+                <Image
+                  src={FOUNDER.photoUrl}
+                  alt={`${FOUNDER.name}, ${FOUNDER.title}`}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </FadeIn>
+          <FadeIn delay={0.15}>
+            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
+              Meet Our Founder
+            </span>
+            <h2 className="mt-4 font-display text-3xl text-foreground md:text-4xl">
+              {FOUNDER.name}
+            </h2>
+            <p className="mt-1 text-sm text-muted-foreground">{FOUNDER.title}</p>
+            <blockquote className="mt-6 border-l-2 border-gold pl-6 font-display text-xl italic text-gold-soft md:text-2xl">
+              &ldquo;{FOUNDER.signatureQuote}&rdquo;
+            </blockquote>
+            <p className="mt-6 text-base text-muted">{FOUNDER.intro}</p>
+          </FadeIn>
+        </div>
+
+        <div className="mt-16 flex flex-col gap-12 border-t border-border pt-16 lg:ml-[calc(0.8fr+5rem)]">
+          {FOUNDER.milestones.map((milestone, index) => (
+            <FadeIn key={milestone.heading} delay={0.1 + index * 0.05}>
+              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
+                {milestone.period}
+              </span>
+              <h3 className="mt-2 font-display text-2xl text-foreground">{milestone.heading}</h3>
+              <div className="mt-4 flex flex-col gap-4 text-base text-muted">
+                {milestone.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+              {"stats" in milestone && milestone.stats && (
+                <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+                  {milestone.stats.map((stat) => (
+                    <li
+                      key={stat.label}
+                      className="flex items-center gap-3 rounded-md border border-gold/30 px-4 py-3 text-sm text-foreground"
+                    >
+                      <span className="text-xl">{stat.icon}</span>
+                      <span>{stat.label}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </FadeIn>
+          ))}
+        </div>
       </Container>
     </section>
   );

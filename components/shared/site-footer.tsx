@@ -80,6 +80,9 @@ export function SiteFooter() {
             <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="transition-colors hover:text-gold">
               {SITE.phone}
             </a>
+            <a href={`tel:${SITE.landline.replace(/\s/g, "")}`} className="transition-colors hover:text-gold">
+              {SITE.landline}
+            </a>
           </address>
         </div>
       </Container>

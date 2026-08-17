@@ -6,9 +6,9 @@ import { SectionHeading } from "@/components/shared/section-heading";
 import { PortfolioGrid } from "@/features/portfolio";
 
 export const metadata: Metadata = {
-  title: "Portfolio",
+  title: "Our Casting Footprint",
   description:
-    "Browse Actors Carved Studio & Films' work across TVCs, feature films, web series, music videos, serials, short films, vertical series, corporate films, ecommerce, and UGC.",
+    "Explore the massive lineup of projects casted by Actors Carved Studio & Films — TVCs, movies, serials, music videos, web series, short films, and vertical series.",
   alternates: { canonical: "/portfolio" },
   openGraph: { url: "/portfolio" },
 };
@@ -18,9 +18,9 @@ export default function PortfolioPage() {
     <div className="py-20 md:py-28">
       <Container>
         <SectionHeading
-          eyebrow="Our Work"
-          title="A portfolio carved across formats"
-          description="Filter by category or search by title and client — every link is shareable."
+          eyebrow="Our Casting Footprint"
+          title="Our Casting Footprint: Talent on Screen"
+          description="Explore the massive lineup of projects casted by ActorsCarved Studio & Films."
           className="mb-12"
         />
         <Suspense fallback={<PortfolioSkeleton />}>

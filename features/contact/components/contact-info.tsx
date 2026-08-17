@@ -11,6 +11,24 @@ const SOCIAL_LINKS = [
   { href: SITE.social.facebook, label: "Facebook", Icon: FacebookIcon },
 ];
 
+const CONTACT_GROUPS = [
+  {
+    label: "General & Business Enquiries",
+    emails: [SITE.email],
+    phones: [SITE.phone, SITE.landline],
+  },
+  {
+    label: "For Actors",
+    emails: [SITE.actorsEmail, SITE.actorsEmailAlt],
+    phones: [SITE.phone],
+  },
+  {
+    label: "Acting Academy",
+    emails: [SITE.academyEmail],
+    phones: [...SITE.academyPhones],
+  },
+];
+
 export function ContactInfo() {
   return (
     <div className="flex flex-col gap-8">
@@ -33,19 +51,29 @@ export function ContactInfo() {
             {SITE.address.line2}
           </address>
         </div>
-        <div className="flex gap-3">
-          <Mail className="size-5 shrink-0 text-gold" />
-          <a href={`mailto:${SITE.email}`} className="text-sm text-muted hover:text-gold">
-            {SITE.email}
-          </a>
-        </div>
-        <div className="flex gap-3">
-          <Phone className="size-5 shrink-0 text-gold" />
-          <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="text-sm text-muted hover:text-gold">
-            {SITE.phone}
-          </a>
-        </div>
       </div>
+
+      {CONTACT_GROUPS.map((group) => (
+        <div key={group.label} className="flex flex-col gap-4 rounded-md border border-border bg-surface p-6">
+          <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">{group.label}</h3>
+          {group.emails.map((email) => (
+            <div key={email} className="flex gap-3">
+              <Mail className="size-5 shrink-0 text-gold" />
+              <a href={`mailto:${email}`} className="text-sm text-muted hover:text-gold">
+                {email}
+              </a>
+            </div>
+          ))}
+          {group.phones.map((phone) => (
+            <div key={phone} className="flex gap-3">
+              <Phone className="size-5 shrink-0 text-gold" />
+              <a href={`tel:${phone.replace(/\s/g, "")}`} className="text-sm text-muted hover:text-gold">
+                {phone}
+              </a>
+            </div>
+          ))}
+        </div>
+      ))}
 
       <WhatsAppButton
         message="Hi Actors Carved Studio, I have a general enquiry."
