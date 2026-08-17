@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Quote, Star, BadgeCheck } from "lucide-react";
 
 import { TESTIMONIALS } from "@/content/testimonials";
@@ -6,6 +5,16 @@ import { Container } from "@/components/shared/container";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { Carousel } from "@/components/shared/carousel";
 import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+function getInitials(name: string) {
+  return name
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase())
+    .join("");
+}
 
 export function TestimonialsSection() {
   return (
@@ -29,15 +38,14 @@ export function TestimonialsSection() {
                   ))}
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="relative size-11 shrink-0 overflow-hidden rounded-full">
-                    <Image
-                      src={testimonial.avatarUrl}
-                      alt={testimonial.name}
-                      fill
-                      sizes="44px"
-                      className="object-cover"
-                    />
-                  </div>
+                  <Avatar className="size-11 border border-border">
+                    {testimonial.avatarUrl ? (
+                      <AvatarImage src={testimonial.avatarUrl} alt={testimonial.name} />
+                    ) : null}
+                    <AvatarFallback className="bg-gold/10 text-sm font-medium text-gold">
+                      {getInitials(testimonial.name)}
+                    </AvatarFallback>
+                  </Avatar>
                   <div>
                     <p className="text-sm font-medium text-foreground">{testimonial.name}</p>
                     <p className="text-xs text-muted-foreground">{testimonial.role}</p>
